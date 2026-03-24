@@ -7,30 +7,8 @@ on:
     branches: ["main"]
 
 jobs:
-  lint:
-    name: Verificación de Formato (Ruff)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clonar el código fuente
-        uses: actions/checkout@v4
-      
-      - name: Configurar Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          
-      - name: Instalar linter (Ruff)
-        run: pip install ruff
-        
-      - name: Ejecutar revisión de formato
-        working-directory: taller_formativo_4/taller_evaluado_04
-        run: |
-          ruff check .
-          ruff format --check .
-
-  test:
-    name: Pruebas Unitarias (Pytest)
-    needs: lint
+  build_and_test:
+    name: Verificación y Pruebas
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -47,13 +25,18 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           
-      - name: Instalar dependencias y framework de pruebas
+      - name: Instalar dependencias
         working-directory: taller_formativo_4/taller_evaluado_04
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
           
-      - name: Ejecutar Pruebas
+      - name: Verificación de Formato (Ruff)
+        working-directory: taller_formativo_4/taller_evaluado_04
+        run: |
+          ruff check .
+          ruff format --check .
+          
+      - name: Ejecutar Pruebas (Pytest)
         working-directory: taller_formativo_4/taller_evaluado_04
         run: pytest -v

@@ -1,0 +1,1 @@
+![Estado del CI](https://github.com/Mati934/taller_04_formativo/actions/workflows/ci.yml/badge.svg)
