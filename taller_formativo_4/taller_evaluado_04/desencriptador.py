@@ -27,7 +27,9 @@ def main(
     """
     try:
         resultado = desencriptar(texto_encriptado, llave)
-        console.print(Panel(f"[bold cyan]{resultado}[/]", title="Texto Desencriptado",                         expand=False))
+        console.print(
+            Panel(f"[bold cyan]{resultado}[/]", title="Texto Desencriptado", expand=False)
+        )
     except Exception:
         console.print("[bold red]Error:[/] llave incorrecta o texto encriptado inválido.")
         raise typer.Exit(code=1)

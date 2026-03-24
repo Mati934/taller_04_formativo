@@ -23,7 +23,6 @@ jobs:
         run: pip install ruff
         
       - name: Ejecutar revisión de formato
-        # Navegamos hacia la carpeta donde realmente está tu código
         working-directory: taller_formativo_4/taller_evaluado_04
         run: |
           ruff check .
